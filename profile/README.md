@@ -43,8 +43,7 @@ This GitHub organization hosts **two types of repositories**:
    - Others are updated **daily** (e.g., dynamic tariffs).  
 
 2. **Validation & Schema repositories (Open Source):**  
-   Tools and JSON Schemas for validating published tariff data.  
-   Example: [supplier-data-validation](https://github.com/Strompreise-Schweiz/supplier-data-validation).  
+   Tools and JSON Schemas for validating published tariff data.   
 
 All repositories in this organization are either **Open Source** or **Open Data**.  
 
@@ -69,5 +68,8 @@ If you are unsure how to start, feel free to contact us at **info@strompreise-sc
 
 ## Goal
 
-The project’s goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.  
+The project’s goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.
+
 It complements [strompreis.elcom.admin.ch](https://www.strompreis.elcom.admin.ch/) by adding **detailed tariff structures** that unlock new possibilities for smart energy usage.  
+
+In particular, this initiative aims to provide an **ecosystem for dynamic tariffs**, enabling energy suppliers to publish **daily updated tariff data** in a reliable way while ensuring **traceability and consistency**.  
