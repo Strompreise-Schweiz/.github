@@ -9,14 +9,17 @@
 
 This GitHub organization provides an **open and unified way to publish Swiss electricity tariffs** from energy suppliers, either as **static** or **dynamic** data.  
 
-## Why this project exists
+## Purpose and Goal
 
 Switzerland already has [ElCom’s official electricity price comparison platform](https://www.strompreis.elcom.admin.ch/), which is excellent for obtaining a **general overview of average prices**.  
 
 This initiative complements it by going one step further:  
-- We aim to publish **detailed electricity tariffs** with full price structures, not just averages.  
-- With this level of detail, consumers know **exactly what they pay for electricity**.  
-- And **Energy Management Systems (EMS)** – such as smart home controllers, solar optimizers, or EV charging stations – can automatically shift consumption to times when electricity is both **available and affordable**.  
+- Publishing **detailed tariff structures**, not just averages.  
+- Enabling consumers to understand **exactly what they pay for electricity**.  
+- Allowing **Energy Management Systems (EMS)** – such as smart home controllers, solar optimizers, or EV charging stations – to automatically shift consumption to times when electricity is both **available and affordable**.  
+- Providing an **ecosystem for dynamic tariffs**, where energy suppliers can publish **daily updated tariff data** while ensuring **traceability and consistency**.  
+
+The project’s ultimate goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.   
 
 ## Open Data principles
 
@@ -60,16 +63,8 @@ Everyone is welcome to contribute:
 - **Energy suppliers** can create their own repository in this organization and become the maintainer of their tariffs.  
 - **Developers and enthusiasts** can improve schemas, validation, or build tools on top of the published data.  
 
-We strongly encourage Swiss energy suppliers to participate. **These datasets enable real innovation**.  
+We strongly encourage Swiss energy suppliers to participate — **these datasets enable real innovation**. It is not enough to just *talk* about supporting green technologies and innovation. By publishing transparent electricity tariffs, suppliers actively **shape the future of energy in Switzerland**.  
 
-It is not enough to just *talk* about supporting green technologies and innovation in the energy sector. By publishing transparent electricity tariffs, suppliers actively **shape the future of electrical energy in Switzerland**.  
+If you are unsure how to start, feel free to contact us at info@strompreise-schweiz.ch, we are happy to help. The most important step is the **will to co-create the energy future**.  
 
-If you are unsure how to start, feel free to contact us at **info@strompreise-schweiz.ch**, we are happy to help. The most important step is the **will to co-create the energy future**.  
-
-## Goal
-
-The project’s goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.
-
-It complements [strompreis.elcom.admin.ch](https://www.strompreis.elcom.admin.ch/) by adding **detailed tariff structures** that unlock new possibilities for smart energy usage.  
-
-In particular, this initiative aims to provide an **ecosystem for dynamic tariffs**, enabling energy suppliers to publish **daily updated tariff data** in a reliable way while ensuring **traceability and consistency**.  
+For questions, ideas, or collaboration proposals, please also use the [Discussions](https://github.com/orgs/Strompreise-Schweiz/discussions) section.  
