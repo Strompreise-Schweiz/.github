@@ -11,13 +11,13 @@ This GitHub organization provides an **open and unified way to publish Swiss ele
 
 ## Purpose and Goal
 
-Switzerland already has [ElCom’s official electricity price comparison platform](https://www.strompreis.elcom.admin.ch/), which is excellent for obtaining a **general overview of average prices**.  
+Switzerland already has [ElCom’s official electricity price comparison platform](https://www.strompreis.elcom.admin.ch/), which provides a **general overview of average annual prices**. Additionally, associations like [Verein SmartGridready](https://smartgridready.ch/loesungen/dynamischetarife) list or link to **dynamic tariffs** published by some utilities.
 
 This initiative complements it by going one step further:  
-- Publishing **detailed tariff structures**, not just averages.  
+- Publishing **detailed tariff structures**, not just averages of **static and dynamic tariffs**.  
 - Enabling consumers to understand **exactly what they pay for electricity**.  
 - Allowing **Energy Management Systems (EMS)** – such as smart home controllers, solar optimizers, or EV charging stations – to automatically shift consumption to times when electricity is both **available and affordable**.  
-- Providing an **ecosystem for dynamic tariffs**, where energy suppliers can publish **daily updated tariff data** while ensuring **traceability and consistency**.  
+- Providing an **ecosystem for dynamic tariffs**, where energy suppliers not only publish **daily updated tariff data**, but also rely on a **stable infrastructure, validation tools, and operational support** that ensure long-term **traceability, consistency, and reliability** of their data.
 
 The project’s ultimate goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.   
 
