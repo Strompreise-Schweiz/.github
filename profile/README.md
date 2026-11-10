@@ -1,70 +1,102 @@
-![Strompreise Schweiz Logo](../assets/Logo_Strompreise_Schweiz.svg)  
-  
+![Strompreise Schweiz Logo](../assets/Logo_Strompreise_Schweiz.svg)
 
 # Strompreise Schweiz – Swiss Electricity Tariffs (Open Data)
 
-[![License: terms_by_ask](https://img.shields.io/badge/license-terms__by__ask-purple)](https://www.dcat-ap.ch/vocabulary/licenses/20240716.html#terms_by_ask)
+[![Data license: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-purple)](https://creativecommons.org/licenses/by/4.0/)
+[![Code license: MIT](https://img.shields.io/badge/code-MIT-blue)](https://github.com/Strompreise-Schweiz/tariff-core/blob/main/LICENSE)
 [![Validation](https://img.shields.io/badge/validation-json--schema-orange)](https://github.com/Strompreise-Schweiz/tariff-core)
-[![Open Data](https://img.shields.io/badge/open-data-yellow)](https://www.strompreise-schweiz.ch)
 
-This GitHub organization provides an **open and unified way to publish Swiss electricity tariffs** from energy suppliers, either as **static** or **dynamic** data.  
+Swiss electricity tariffs in one schema, validated, with full history: constant, multilevel and dynamic.
 
-## Purpose and Goal
+## Why
 
-Switzerland already has [ElCom’s official electricity price comparison platform](https://www.strompreis.elcom.admin.ch/), which provides a **general overview of average annual prices**. Additionally, associations like [Verein SmartGridready](https://smartgridready.ch/loesungen/dynamischetarife) list or link to **dynamic tariffs** published by some utilities.
+Tariff data is already published in several places:
 
-This initiative complements it by going one step further:  
-- Publishing **detailed tariff structures**, not just averages of **static and dynamic tariffs**.  
-- Enabling consumers to understand **exactly what they pay for electricity**.  
-- Allowing **Energy Management Systems (EMS)** – such as smart home controllers, solar optimizers, or EV charging stations – to automatically shift consumption to times when electricity is both **available and affordable**.  
-- Providing an **ecosystem for dynamic tariffs**, where energy suppliers not only publish **daily updated tariff data**, but also rely on a **stable infrastructure, validation tools, and operational support** that ensure long-term **traceability, consistency, and reliability** of their data.
+- [ElCom](https://www.elcom.admin.ch/tarifdaten-und-visualisierungen) publishes prices per grid operator as linked data on
+  [LINDAS](https://lindas.admin.ch/), queried with SPARQL. For each operator it also links to the
+  operator's machine-readable tariff file.
+- Utilities publish these files as JSON in the format of the [VSE](https://www.strom.ch), each on its own server.
+- [SmartGridready](https://smartgridready.ch/loesungen/dynamischetarife) lists utilities with dynamic tariffs.
 
-The project’s ultimate goal is to make **Swiss electricity tariffs transparent, comparable, and usable** — both for **consumers** and for **automated energy systems**.   
+To use this data, for example in an energy management system, you need files that follow one schema,
+can be fetched the same way for every utility, and can be traced back: what did a utility publish
+yesterday for today's dynamic tariff? The original sources answer only the current state, each in its own way.
 
-## Open Data principles
+This organization collects the data and publishes it that way:
 
-Energy suppliers are encouraged to publish their tariff data under open license terms defined by [www.dcat-ap.ch](https://www.dcat-ap.ch/). Within this organization, the target license is:  
+- **One schema.** Published files stay valid VSE files. Additions are only additive.
+- **Validated.** Every change is checked against JSON Schemas and semantic rules (time coverage, product references).
+- **Traceable.** Each file is stored in Git. Every change has a date and a diff, and dynamic tariffs are archived per day.
+- **Cheap to run.** No server. GitHub Actions fetches and validates, files are served from stable URLs.
+- **Open.** Anyone can read the code, report errors, propose changes and discuss in public.
 
-- [`terms_by_ask`](https://www.dcat-ap.ch/vocabulary/licenses/20240716.html#terms_by_ask)  
+## Repositories
 
-This means:  
-- Free usage is permitted.  
-- Attribution is required (author, title, and link to the dataset).  
-- Commercial use is only allowed with prior permission from the data provider.  
+### [`tariff-core`](https://github.com/Strompreise-Schweiz/tariff-core): the engine
 
-Please note: Logos, brand names, and other graphical assets included in repositories remain the property of their respective owners and are **not automatically licensed for reuse**.  
+The central repository. It holds everything the utility repos share: the schemas, the validation,
+the engine that fetches, normalizes and publishes tariffs, the reusable GitHub Actions workflows and
+the tests. It contains code only, no tariff data. A fix here applies to every utility at once.
 
-Other providers may publish similar datasets outside of this organization, possibly under different license terms. Always check the dataset’s own documentation.  
+### The data: hub repo or own repo
 
-## About this GitHub Organization
+The data repos contain no code, only configuration, manual corrections and the generated data. They
+call the workflows of `tariff-core`. Each utility lives in exactly one of them:
 
-This GitHub organization hosts **two types of repositories**:
+- **[`strompreise-schweiz.github.io`](https://github.com/Strompreise-Schweiz/strompreise-schweiz.github.io), the hub repo:**
+  all utilities with constant and multilevel tariffs only, one folder each. These tariffs change about
+  once a year, so one weekly run checks all of them, and corrections arrive as pull requests. This is
+  where most utilities live, maintained by this project.
+- **Own repo, named after the utility,** for example [`ekz`](https://github.com/Strompreise-Schweiz/ekz),
+  [`bkw`](https://github.com/Strompreise-Schweiz/bkw) and [`groupe-e`](https://github.com/Strompreise-Schweiz/groupe-e):
+  utilities with dynamic tariffs, or that maintain their data themselves. Dynamic tariffs change daily,
+  so they are fetched every evening and archived per day. An own repo holds all tariffs of its utility,
+  including the constant and multilevel ones.
 
-1. **Electricity tariff data (Open Data):**  
-   Repositories where Swiss energy suppliers or electricity providers can publish their tariffs.  
-   - Some datasets are updated **once per year**.  
-   - Others are updated **daily** (e.g., dynamic tariffs).  
+### One address for everything
 
-2. **Validation & Schema repositories (Open Source):**  
-   Tools and JSON Schemas for validating published tariff data.   
+The hub repo is also the website of the organization on GitHub Pages and serves all utilities under
+one domain, whether they live in the hub or in their own repo:
 
-All repositories in this organization are either **Open Source** or **Open Data**.  
+```text
+https://data.strompreise-schweiz.ch/index.json                 every utility
+https://data.strompreise-schweiz.ch/<utility>/index.json       all URLs of one utility
+```
 
-## Ecosystem
+A utility can move between the hub and an own repo without any of these URLs changing. See
+[stable URLs](https://github.com/Strompreise-Schweiz/tariff-core/blob/main/docs/stable-urls.md) for details.
 
-- The website [www.strompreise-schweiz.ch](https://www.strompreise-schweiz.ch) indexes and lists available datasets.  
-  - It is **not open source**, but serves as a **central aggregator**.  
-- Everyone is free to build their own portal or services on top of the open datasets, for example by converting tariffs into **OCPI**, a standard widely used in the e-mobility sector.  
+### Other repositories
+
+| Repository | Purpose |
+|---|---|
+| [`utility-template`](https://github.com/Strompreise-Schweiz/utility-template) | Starting point for a utility with its own repo |
+| [`.github`](https://github.com/Strompreise-Schweiz/.github) | This profile and the [Discussions](https://github.com/orgs/Strompreise-Schweiz/discussions) |
+
+## Technology and skills
+
+- **Python** (standard library, `jsonschema`) for fetching, normalizing and validating
+- **JSON Schema** and the **VSE OpenAPI definition** for the formats
+- **GitHub Actions** for scheduling, **Git** for history, **GitHub Pages** for serving
+- **Domain knowledge** of Swiss tariffs: energy, grid, metering and fees, price sheets, clock changes
+
+Help is welcome in any of these, also without writing code: checking tariffs against price sheets
+is as valuable as improving the engine.
+
+## Open data
+
+Tariff data is published under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), one of the licenses
+in the [DCAT-AP CH vocabulary](https://www.dcat-ap.ch/vocabulary/licenses/20240716.html): free use, including
+commercial use, as long as the source is named. Nobody has to ask for permission first. The code is licensed under MIT.
+
+Logos and brand names remain the property of their owners and are not covered by these licenses.
 
 ## Contributing
 
-Everyone is welcome to contribute:  
+- **Utilities** can send their tariffs or corrections, and this project publishes them in the hub repo.
+  Utilities that want to maintain their data themselves get their own repository.
+- **Developers and energy experts** can improve schemas, validation and tools, or build on the data.
 
-- **Energy suppliers** can create their own repository in this organization and become the maintainer of their tariffs.  
-- **Developers and enthusiasts** can improve schemas, validation, or build tools on top of the published data.  
-
-We strongly encourage Swiss energy suppliers to participate — **these datasets enable real innovation**. It is not enough to just *talk* about supporting green technologies and innovation. By publishing transparent electricity tariffs, suppliers actively **shape the future of energy in Switzerland**.  
-
-If you are unsure how to start, feel free to contact us at info@strompreise-schweiz.ch, we are happy to help. The most important step is the **will to co-create the energy future**.  
-
-For questions, ideas, or collaboration proposals, please also use the [Discussions](https://github.com/orgs/Strompreise-Schweiz/discussions) section.  
+Questions and ideas go to [Discussions](https://github.com/orgs/Strompreise-Schweiz/discussions) or
+info@strompreise-schweiz.ch. The website [www.strompreise-schweiz.ch](https://www.strompreise-schweiz.ch)
+lists the available datasets.
