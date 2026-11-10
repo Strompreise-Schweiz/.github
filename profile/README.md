@@ -4,7 +4,7 @@
 # Strompreise Schweiz – Swiss Electricity Tariffs (Open Data)
 
 [![License: terms_by_ask](https://img.shields.io/badge/license-terms__by__ask-purple)](https://www.dcat-ap.ch/vocabulary/licenses/20240716.html#terms_by_ask)
-[![Validation with ajv](https://img.shields.io/badge/validation-ajv-orange)](https://github.com/Strompreise-Schweiz/supplier-data-validation)
+[![Validation](https://img.shields.io/badge/validation-json--schema-orange)](https://github.com/Strompreise-Schweiz/tariff-core)
 [![Open Data](https://img.shields.io/badge/open-data-yellow)](https://www.strompreise-schweiz.ch)
 
 This GitHub organization provides an **open and unified way to publish Swiss electricity tariffs** from energy suppliers, either as **static** or **dynamic** data.  
