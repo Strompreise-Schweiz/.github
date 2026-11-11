@@ -32,6 +32,10 @@ This organization collects the data and publishes it that way:
 
 ## Repositories
 
+![How the repositories fit together: utilities publish tariffs, the data repos fetch them with the workflows of tariff-core and deploy them to data.strompreise-schweiz.ch](../assets/repositories.drawio.svg)
+
+[Open in draw.io](https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FStrompreise-Schweiz%2F.github%2Fmain%2Fassets%2Frepositories.drawio.svg)
+
 ### [`tariff-core`](https://github.com/Strompreise-Schweiz/tariff-core): the engine
 
 The central repository. It holds everything the utility repos share: the schemas, the validation,
@@ -64,6 +68,15 @@ one domain, whether they live in the hub or in their own repo:
 
 A utility can move between the hub and an own repo without any of these URLs changing. See
 [stable URLs](https://github.com/Strompreise-Schweiz/tariff-core/blob/main/docs/stable-urls.md) for details.
+
+### How the data stays current
+
+Each data repo runs a few short workflows. They only name a trigger and call the matching reusable
+workflow of `tariff-core`, which does the work. New data is committed, and each commit deploys the site.
+
+![How data is fetched, checked and deployed: trigger, workflow in the data repo, reusable workflow in tariff-core and result](../assets/deployment.drawio.svg)
+
+[Open in draw.io](https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FStrompreise-Schweiz%2F.github%2Fmain%2Fassets%2Fdeployment.drawio.svg)
 
 ### Other repositories
 
