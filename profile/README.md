@@ -66,6 +66,8 @@ one domain, whether they live in the hub or in their own repo:
 - `data.strompreise-schweiz.ch/<utility>/index.json`: all URLs of one utility, for example
   [EKZ](https://data.strompreise-schweiz.ch/ekz/index.json)
 
+- [`data.strompreise-schweiz.ch/status.html`](https://data.strompreise-schweiz.ch/status.html): what the checks found for every utility
+
 A utility can move between the hub and an own repo without any of these URLs changing. See
 [stable URLs](https://github.com/Strompreise-Schweiz/tariff-core/blob/main/docs/stable-urls.md) for details.
 
