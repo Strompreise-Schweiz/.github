@@ -74,7 +74,7 @@ A utility can move between the hub and an own repo without any of these URLs cha
 
 ## Technology and skills
 
-- **Python** (standard library, `jsonschema`) for fetching, normalizing and validating
+- **TypeScript** on **Node.js** (`ajv` for JSON Schema) for fetching, normalizing and validating
 - **JSON Schema** and the **VSE OpenAPI definition** for the formats
 - **GitHub Actions** for scheduling, **Git** for history, **GitHub Pages** for serving
 - **Domain knowledge** of Swiss tariffs: energy, grid, metering and fees, price sheets, clock changes
