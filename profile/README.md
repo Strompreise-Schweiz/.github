@@ -58,10 +58,9 @@ call the workflows of `tariff-core`. Each utility lives in exactly one of them:
 The hub repo is also the website of the organization on GitHub Pages and serves all utilities under
 one domain, whether they live in the hub or in their own repo:
 
-```text
-https://data.strompreise-schweiz.ch/index.json                 every utility
-https://data.strompreise-schweiz.ch/<utility>/index.json       all URLs of one utility
-```
+- [`data.strompreise-schweiz.ch/index.json`](https://data.strompreise-schweiz.ch/index.json): every utility
+- `data.strompreise-schweiz.ch/<utility>/index.json`: all URLs of one utility, for example
+  [EKZ](https://data.strompreise-schweiz.ch/ekz/index.json)
 
 A utility can move between the hub and an own repo without any of these URLs changing. See
 [stable URLs](https://github.com/Strompreise-Schweiz/tariff-core/blob/main/docs/stable-urls.md) for details.
