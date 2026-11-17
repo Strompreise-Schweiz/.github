@@ -25,6 +25,8 @@ yesterday for today's dynamic tariff? The original sources answer only the curre
 This organization collects the data and publishes it that way:
 
 - **One schema.** Published files stay valid VSE files. Additions are only additive.
+- **What you pay.** A tariff file lists energy, grid, metering and fees separately. A product puts
+  them together, as a price sheet does: the standard product of a household, per month and per kWh.
 - **Validated.** Every change is checked against JSON Schemas and semantic rules (time coverage, product references).
 - **Traceable.** Each file is stored in Git. Every change has a date and a diff, and dynamic tariffs are archived per day.
 - **Cheap to run.** No server. GitHub Actions fetches and validates, files are served from stable URLs.
@@ -65,7 +67,9 @@ one domain, whether they live in the hub or in their own repo:
 - [`data.strompreise-schweiz.ch/index.json`](https://data.strompreise-schweiz.ch/index.json): every utility
 - `data.strompreise-schweiz.ch/<utility>/index.json`: all URLs of one utility, for example
   [EKZ](https://data.strompreise-schweiz.ch/ekz/index.json)
-
+- `data.strompreise-schweiz.ch/<utility>/products/standard/<year>.json`: what a household in the basic
+  supply pays, every component and the total, where the standard product is defined, for example
+  [EKZ 2026](https://data.strompreise-schweiz.ch/ekz/products/standard/2026.json)
 - [`data.strompreise-schweiz.ch/status.html`](https://data.strompreise-schweiz.ch/status.html): what the checks found for every utility
 
 A utility can move between the hub and an own repo without any of these URLs changing. See
