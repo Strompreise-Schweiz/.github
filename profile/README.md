@@ -34,9 +34,28 @@ This organization collects the data and publishes it that way:
 
 ## Repositories
 
-![How the repositories fit together: utilities publish tariffs, the data repos fetch them with the workflows of tariff-core and deploy them to data.strompreise-schweiz.ch](../assets/repositories.drawio.svg)
+```mermaid
+flowchart LR
+  U["Utilities<br/>VSE files for yearly tariffs,<br/>APIs for day prices"]
+  subgraph org["GitHub organization Strompreise-Schweiz"]
+    C["tariff-core<br/>code only: schemas, engine,<br/>reusable workflows, tests"]
+    T["utility-template<br/>starting point for a new own repo"]
+    H["strompreise-schweiz.github.io<br/>hub repo: one folder per utility<br/>without day prices"]
+    O["Own repo per utility<br/>ekz, bkw, groupe-e:<br/>with day prices"]
+    G[".github<br/>this profile, Discussions"]
+  end
+  P["GitHub Pages<br/>data.strompreise-schweiz.ch"]
+  K["Consumers<br/>energy management systems,<br/>apps, research"]
 
-[Open in draw.io](https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FStrompreise-Schweiz%2F.github%2Fmain%2Fassets%2Frepositories.drawio.svg)
+  U -->|fetch| H
+  U -->|fetch| O
+  C -.->|workflows @main| H
+  C -.->|workflows @main| O
+  T -.->|new repo from| O
+  H -->|deploy| P
+  O -->|deploy| P
+  P -->|JSON over HTTPS| K
+```
 
 ### [`tariff-core`](https://github.com/Strompreise-Schweiz/tariff-core): the engine
 
@@ -80,9 +99,16 @@ A utility can move between the hub and an own repo without any of these URLs cha
 Each data repo runs a few short workflows. They only name a trigger and call the matching reusable
 workflow of `tariff-core`, which does the work. New data is committed, and each commit deploys the site.
 
-![How data is fetched, checked and deployed: trigger, workflow in the data repo, reusable workflow in tariff-core and result](../assets/deployment.drawio.svg)
+| When | Workflow in the data repo | Reusable workflow in `tariff-core` | Result in `data/` |
+|---|---|---|---|
+| Every evening at 18:35, 20:05 and 22:05 Swiss time, or by hand. Own repos only | `update-prices.yml` | `reusable-update.yml`: `fetch.ts --prices`, `build.ts`, commit | the day prices: `sources/days/`, `tariffs/<year>/<tariff>/`, `products/<id>/<year>/`, today and tomorrow in `tariffs/current/` and `products/<id>/latest.json` |
+| Mondays 06:20, daily from 1 to 15 September, after a push to `curation/` or `config/`, or by hand | `update-tariffs.yml` | `reusable-update.yml`: `fetch.ts --tariffs`, `build.ts`, commit | the yearly files: `sources/<name>.json`, `tariffs/<year>.json`, `products/<id>/<year>.json`, `checks.json`, `index.json` |
+| Each push and pull request | `validate.yml` | `reusable-validate.yml`: `validate.ts` | passes or fails, no commit |
+| After a push to `data/` or an update run | `pages.yml` | `reusable-pages.yml`: `build-site.ts`, deploy | `data.strompreise-schweiz.ch/<utility>/` |
 
-[Open in draw.io](https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FStrompreise-Schweiz%2F.github%2Fmain%2Fassets%2Fdeployment.drawio.svg)
+Every data repo calls the reusable workflows of `tariff-core` from `main`, so a fix there applies to
+every utility at once. The hub repo has no `update-prices.yml`: day prices commit every day and belong
+in an own repo.
 
 ### Other repositories
 
